@@ -1,0 +1,34 @@
+\documentclass{proj-report}
+
+
+% Adds support for full page background picture
+\usepackage[contents={},color=gray]{background}
+
+%%% Tables %%%
+\usepackage{tabularx}
+\usepackage{xltabular}
+
+%%% Adjust page %%%
+\usepackage{changepage} % Allows for adjustment of requirements table page.
+\usepackage{lscape}     % Pages can be turned (landscape).
+\usepackage{pdflscape}
+
+%%% Bibliography %%%
+%Currently uses BibTeX.
+\bibliographystyle{plain}
+
+%%% Hyperref %%%
+\hypersetup{%
+	pdfpagelabels=true,%
+	plainpages=false,%
+	pdfauthor={Author(s)},%
+	pdftitle={Title},%
+	pdfsubject={Subject},%
+	bookmarksnumbered=true,%
+	colorlinks=false,%
+	citecolor=black,%
+	filecolor=black,%
+	linkcolor=black,% you should probably change this to black before printing
+	urlcolor=black,%
+	pdfstartview=FitH%
+}
