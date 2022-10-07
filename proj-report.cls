@@ -64,10 +64,12 @@ ItalicFont= *-Italic]
   {\aaufontblack\LARGE\bfseries\color{aaublue1}}{\thesection\;}{6pt}{\MakeUppercase{#1}}
   
 \titleformat{\subsection}
-  {\aaufontbold\large\bfseries\color{aaublue1}}{\thesection\;}{6pt}{\MakeUppercase{#1}}
+  {\aaufontbold\large\bfseries\color{aaublue1}}{\thesubsection\;}{6pt}{\MakeUppercase{#1}}
  
 \titleformat{\subsubsection}
-  {\aaufontbold\normalsize\bfseries\color{aaublue1}}{\thesection\;}{6pt}{\MakeUppercase{#1}}
+  {\aaufontbold\normalsize\bfseries\color{aaublue1}}{\thesubsubsection\;}{6pt}{\MakeUppercase{#1}}
+
+\renewcommand{\paragraph}[1]{\vspace{1em}\noindent{\aaufontbold\color{aaublue1} #1}}
 
 
 
@@ -83,6 +85,10 @@ ItalicFont= *-Italic]
 \department={#1}}
 \def\supervisor#1{\newtoks\supervisor%
 \supervisor={#1}}
+\def\abstract#1{\newtoks\abstract%
+\abstract={#1}}
+\def\theme#1{\newtoks\theme%
+\theme={#1}}
 
  
 %% === TABLE OF CONTENTS === %%
@@ -144,12 +150,12 @@ ItalicFont= *-Italic]
     \vspace{0.2cm}
    \begin{center}
     {\Large\MakeUppercase{
-      \the\department
-    }}\\
+      \the\department\\
+    }}
     \vspace{0.2cm}
     {\large\aaufont
       \the\projectgroup %
-      , \thedate% insert name of study, group number, year-month
+        , \thedate% insert name of study, group number, year-month
     }
    \end{center}
    \vspace{0.2cm}
@@ -173,6 +179,7 @@ ItalicFont= *-Italic]
 % === TITLEPAGE ===
 
 \def\tpagestyle#1{{\color{aaublue1}\aaufontbold\large#1}}
+\def\aautstyle{\color{aaublue1}\aaufontbold\large}
 
 \newcommand{\indexpage}{%
     %create title page
@@ -182,21 +189,21 @@ ItalicFont= *-Italic]
 \begin{tabular}{@{}ll@{}}
   \parbox[t]{0.5\textwidth}{\raggedright\sf\small
     \tpagestyle{Title:}\\ \thetitle\bigskip\par
-    \tpagestyle{Theme:}\\ Hej\bigskip\par
+    \tpagestyle{Theme:}\\ \the\theme\bigskip\par
     \tpagestyle{Project Period:}\\ \thedate\bigskip\par
     \tpagestyle{Project Group:}\\ \the\projectgroup\bigskip\par
     \tpagestyle{Participant(s):}\\ \the\participants \bigskip\par
     \tpagestyle{Supervisor(s):}\\ \the\supervisor\bigskip\par
     \tpagestyle{Copies:}\\ How many copies\bigskip\par
     \tpagestyle{Page Numbers:}\\ \pageref{LastPage}\bigskip\par
-    \tpagestyle{Date of Completion:}\\ The date
+    \tpagestyle{Date of Completion:}\\ \the\year-\ifnum\month<10 0\fi\the\month-\the\day{}
     \bigskip\\
     \textbf{Electronics and IT}\\
     Aalborg University\\
-    \href{http://www.aau.dk}{http://www.aau.dk}} &
+    \href{https://www.aau.dk}{https://www.aau.dk}} &
   \parbox[t]{0.5\textwidth}{%
   \tpagestyle{Abstract:}\bigskip\par
-      Hej
+      \the\abstract
   }
 \end{tabular}
 \vfill
@@ -207,7 +214,7 @@ ItalicFont= *-Italic]
 
 \vfill
 
-\noindent{\footnotesize\emph{The content of this report is freely available, but publication (with reference) may only be pursued due to agreement with the author.}}
+\noindent{\footnotesize\emph{The content of this report is freely available, but publication (with reference) may only be pursued after agreement with the author.}}
 }
 \clearpage
 }

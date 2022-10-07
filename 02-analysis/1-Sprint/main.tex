@@ -1,0 +1,33 @@
+\section{Sprint One}
+The first sprint was spent getting a better understanding of the problem, the requirements, the theory, and the codebase. Beyond that, the Scrum Master from our team had to write, with the other Scrum Masters, some common sections about Ecdar and the work-method between groups, meaning the first sprint was spent doing quite a bit of research.
+
+\subsection{Plans}
+To get a better understanding of the problem a few things had to be researched:
+\begin{itemize}
+    \item Organization of the work inside our group as well as between the other groups.
+    \item When the feature could be considered done.
+    \item If there were any parts of the theory we should keep in mind.
+    \item The different scenarios when a clock is redundant.
+    \item Where in the codebase the feature should be implemented.
+\end{itemize}
+
+\subsection{Done criteria}
+Our product owner gave us a definition of done which consists of
+\begin{itemize}
+    \item Our methods should remove some clocks in cases that we specify ourselves
+    \item All refinement/consistency check tests pass successfully
+    \item We can convincingly reason that our rules theoretically does not change the behavior in all cases. We can optionally formally prove it.
+\end{itemize}
+
+The done criteria are the main goals in this project, where the sprints are used to solve to-dos in the product backlog which is targeted at the criteria. The done criteria should therefore act as a guide for the scrum team where sprints are planned with the done criteria in mind. Each sprint review the scrum team will look at the done criteria to make sure they are on the right path, and how far they are from meeting the criteria.
+
+\subsection{Relevant Theory}
+While we are not creating additional theory, it is crucial to understand the relevant parts of the theory, and how to go about it. The primary theory we need to be aware of are DBMs (Section \ref{sec:DBM}), where we need to understand both how they are implemented, and what effect removing a clock has on them.
+
+Theory-wise, when removing a clock, the corresponding row and column needs to be removed from the DBM. Luckily, the implementation is fairly straight forward. It is structured in a way that we only need to modify a hashmap with the clock definitions along with the guards they are used within and of course modifying the federation by either removing the clock, or ignore the clock by setting all of its constraints to either $\infty$ or $0$ as it fits.
+
+\input{02-analysis/1-Sprint/scenarios}
+\input{02-analysis/1-Sprint/codebase}
+
+\input{02-analysis/1-Sprint/review}
+\input{02-analysis/1-Sprint/retro}

@@ -7,25 +7,55 @@
 %%% Tables %%%
 \usepackage{tabularx}
 \usepackage{xltabular}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{float}
+\usepackage{xltabular}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{todonotes}
+\setuptodonotes{inline}
+\usepackage{tikz}
+\input{tikz_stuff}
+\usepackage{listings}
+\usepackage{minted}
+%\usemintedstyle{pastie}
+\newminted{rust}{
+xleftmargin=1.4em,
+numbersep=1em,
+linenos,
+%rulecolor=aaublue,
+%bgcolor=bgcol,
+%frame=single,
+%framesep=2cm,
+%framerule=.5pt,
+fontsize=\small,
+autogobble,
+breaklines,
+breakbytokenanywhere=true,
+firstnumber=1,
+}
+\newmintinline{rust}{}
+
 
 %%% Adjust page %%%
 \usepackage{changepage} % Allows for adjustment of requirements table page.
 \usepackage{lscape}     % Pages can be turned (landscape).
 \usepackage{pdflscape}
-
 %%% Bibliography %%%
 %Currently uses BibTeX.
 \bibliographystyle{plain}
 
 %%% Hyperref %%%
 \hypersetup{%
-	pdfpagelabels=true,%
+	%pdfpagelabels=true,%
 	plainpages=false,%
 	pdfauthor={Author(s)},%
 	pdftitle={Title},%
 	pdfsubject={Subject},%
 	bookmarksnumbered=true,%
-	colorlinks=false,%
+	colorlinks=true,%
 	citecolor=black,%
 	filecolor=black,%
 	linkcolor=black,% you should probably change this to black before printing

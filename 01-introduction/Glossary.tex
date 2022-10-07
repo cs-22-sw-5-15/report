@@ -1,0 +1,33 @@
+\section{Glossary}
+In this section we outline and explain the main terms that are used throughout this report.
+
+%\vspace{1em}
+{\renewcommand{\arraystretch}{1.5}
+\begin{xltabular}{\linewidth}[H]{>{\aautstyle}l|X}
+    \endfirsthead
+        %\multicolumn{2}{c}{\multirow{2}{*}{\footnotesize\textbf{Table \ref{tab:glossary}:} \textit{Continues on next page.}}}\\
+        %\multicolumn{2}{c}{\multirow{2}{*}{\footnotesize\textbf{Table \ref{tab:glossary}:} Glossary.}}\\
+    \endhead
+    \endfoot
+    \endlastfoot
+    \multicolumn{2}{c}{\multirow{2}{*}{\footnotesize\textbf{Table \ref{tab:glossary}:} Glossary.}}\\
+    TIOA & Timed Input/Output Automata are build upon two extensions to basic automata:
+    \begin{enumerate}
+        \item The addition of clocks to keep track of time.
+        \item The addition of input/output actions.
+    \end{enumerate} \\
+    Clock & Clocks are used to represent time. They can be used in the edges' guards in a TIOA and can be re-assigned as an action. \\
+    I/O actions & Input/Output actions are actions a TIOA can perform. Input actions originate from outside (the environment/other components), while output actions originate from within. \\
+    Component & A Component is a subsystem, which is part of a bigger TIOA system, able to communicate with the other components through input/output actions. \\
+    DBM & Difference Bound Matrices are a way to represent Zones (See Section \ref{sec:DBM} for more detail).\\
+    Zone & Zones are the convex spaces where a clock-invariant evaluates to true. \\
+    Federation & Federations are collections over DBMs (Section \ref{sec:DBM}). \\
+    Specification &  A specification is a transition system where all of its states are input-enabled (See Section \ref{sec:TIOA})\\%Requirements that the model has to satisfy in order to verify the model.\\
+    Refinement & An operator, denoted \texttt{<=} ($\leq$), verifying that more detailed models `coincide' within the abstract version of it. \\
+    Conjunction & An operator, denoted \texttt{\&\&} ($\&\&$), that combines two or more specifications from the same component.\\
+    Parallel Composition & An operator, denoted \texttt{||} ($||$), that combines two or more specifications from different components \\
+    Quotient & An operator, denoted \texttt{\textbackslash\textbackslash} ($\backslash\backslash$), that calculates the missing component based on the current component and the given specification \\
+    Pruning & An operation that gets rid of parts of the specifications that cannot be implemented.\\
+    Reveaal & A backend-engine written in Rust for ECDAR, implementing TIOA model checking.
+    \label{tab:glossary}
+\end{xltabular}}

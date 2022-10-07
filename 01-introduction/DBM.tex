@@ -1,0 +1,31 @@
+\subsection{DBM}\label{sec:DBM}
+In a TIOA it is crucial to keep track on the clocks and their guards and invariants. This can be done by the usage of \emph{Difference Bound Matrices} (abbreviated to DBM). This is the method Reveaal uses.
+A DBM is used to represent \emph{zones};  convex spaces where a clock-invariant evaluates to true. The size of a DBM is $n+1 \times n+1$ where $n$ is the number of clocks in the model.
+Each entry in a DBM is the a tuple $(a, \prec)$ where $\prec \in \hspace{-3pt} \{<, \leq\}$ and $a \in \mathbb{R} \cup \{ -\infty, \infty \}$ \cite{peron:hal-00189821, Joost:DBM19}. The tuple $(a, \prec)$ consists of $a$ which is a constant that sets the bound for the clock, where $\prec$ tells if the constant is inside the bound or not.
+Given a DBM and entries row $i$ column $j$, the invariant can be interpreted as a logical conjunction of all entries $c_i - c_j \prec a$. 
+
+In Equation \ref{eq:con} we see an example for a constraint, and the according DBM can be seen in Equation \ref{eq:DBM_ex} and the visualisation in Figure \ref{fig:DBM_ex}.
+\begin{equation}\label{eq:con}
+    x \geq 2 \wedge x \leq 6 \wedge y \geq 1 \wedge y \leq 5 \wedge x \leq y + 3 \wedge y \leq x + 1
+\end{equation}
+\begin{equation}\label{eq:DBM_ex}
+    M = 
+    \begin{bmatrix}
+                 &&    x    &    y\\
+          & (0, \leq) & (-2, <) & (-1, <)\\
+        x & (6, <) & (0, \leq) & (3, <)\\
+        y & (5, \leq) & (1, <) & (0, \leq) 
+    \end{bmatrix}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \coordSys{6}{5}
+        \drawDBM{{(2,1), (2,3), (4,5), (6,5), (6,3), (4,1)}}{blue!25!white}
+    \end{tikzpicture}
+    \caption{A visuallisation of DBM $M$ with two clocks; $x$ and $y$}
+    \label{fig:DBM_ex}
+\end{figure}
+
+One might notice that one DBM can only represent one guard/invariant, but in a large system with multiple edges and locations we need several. This is done by using \emph{Federations}, which is a collection of DBMs, capable of performing special operations on the DBMs such as finding the intersection between two DBMs, which corresponds to the zone of which both invariants evaluate to true. Federations can also be viewed as a union of zones \cite{ecdartheory, Rokicki_DBM}.

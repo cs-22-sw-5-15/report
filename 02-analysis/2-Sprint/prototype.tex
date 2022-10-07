@@ -1,0 +1,92 @@
+\subsection{Identifying Redundant Clocks}
+We wanted to create a function, that we can use for identifying redundant clocks. We also wanted to create tests for this function. To do this the most efficient way, we split our group up in two sub groups working on the function and the tests. To do this we had to agree upon a function prototype. 
+
+\subsection{Prototype}
+
+The prototype we came up with was a function that takes in a component, which then returns a vector of redundant clocks, this can be seen in Listing \ref{lst:FindClockProto}. 
+
+\begin{listing}
+    \begin{rustcode}
+        fn find_redundant_clocks(&self) -> Vec<RedundantClock> 
+    \end{rustcode}
+    \caption{Function prototype}
+    \label{lst:FindClockProto}
+\end{listing}
+\begin{verbatim}
+\end{verbatim}
+
+The redundant clocks, contain infomation about the edges and locations where the clock is present, and also the reason for why it is declared redundant.
+
+\begin{listing}
+    \begin{rustcode}
+    pub struct RedundantClock {
+        clock: String,
+        edge_indices: Vec<usize>,
+        location_indices: Vec<usize>,
+        reason: ClockReason,
+        //updates: Option<Vec<Update>>,
+    }
+    \end{rustcode}
+    \caption{Struct representing redundant clock}
+    \label{lst:RedundantClock}
+\end{listing}
+
+The struct in Listing \ref{lst:RedundantClock} represent a redundant clock, where the field \texttt{clock} represent that clock key, that is used to access the clocks index in the component. This will be useful, when we implement a clock remover. \texttt{edge\_indices} and \texttt{location\_indices}, tell us where the clocks are used. 
+
+The field \texttt{reason}, is a \texttt{ClockReason} enum, which describes the reason why a clock reduction operation was performed. The options are:
+\begin{description}
+\item[\texttt{Duplicate}] The clock was removed because it was exactly equivalent to another clock.
+\item[\texttt{Unused}] The clock could be removed because it was never used in a guard or invariant.
+\end{description}
+
+\texttt{ClockReason} will also be used to send information to the GUI, of why it was removed.
+
+Defining our data structures and function prototype, before beginning on the implementation allows us to create the implementation and testing of the function and data structures, simultaneously. 
+%
+%funktion skal have et component. Retunerer et array af strings som identificerer de clocks, som kan fjernes. 
+%
+%Derudover skal der være en enum som fortæller hvorfor den kan %fjernes. Dette kan kommunikeres over gRPC
+%
+%
+%Når vi fjerner clocks skal vi nogle gange fjerne den, og andre %gange replace den med en clock som er identisk.
+%
+%
+%
+%\begin{verbatim}
+%enum ClockOptimizationReason {
+%    Redundant {
+%        replaced_by_clock: String
+%    },
+%    Unused
+%};
+%
+%struct ClockOptimization {
+%    target: String;
+%    reason: ClockOptimizationReason
+%}
+%
+%fn find_optimizeable_clocks(component: &Component) -> %Vec<ClockOptimization>;
+%
+%fn find_removable_clocks(component: &Component) -> %Vec<ClockRemoval>;
+%
+%fn remove_clocks(component: &mut Component, clockOptimization: %&Vec<ClockOptimizationReason>);
+%\end{verbatim}
+%
+%
+%
+%\begin{verbatim}
+%enum ClockReason {
+%    Duplicate(String),
+%    Unused
+%}
+%
+%struct RedundantClock {
+%    clock: String,
+%    edges: Vec<usize>,
+%    locs: Vec<usize>,
+%    reason: ClockReason,
+%}
+%
+%fn find_redundant_clocks(&self) -> Vec<RedundantClock>;
+%\end{verbatim}
+

@@ -1,0 +1,84 @@
+\subsection{Scenarios} \label{scenarios}
+When trying to reduce clocks there are multiple scenarios which can be looked into. One scenario is a clock being initiated but is not involved in constraints. The clock can in this situation be removed, as it does not violate any constraints. 
+
+Another scenario is when components are combined using conjunction and parallel composition, one clock can affect the importance of the other resulting in the first clock becoming redundant. This can be done if the constraints becomes redundant when combining the clocks.
+
+Another scenario where clocks from two components can be combined is if the two clocks both reset at the same time. Every situation needs to be analyzed to make sure that they reset at the same time, every time. Suppose in figure \ref{fig:tioa-scenario1} that the edges before and after the clock reset in each component only had output actions and no guards. If the two components were to be combined into one, the clocks could also be combined.  % they both only resets upon the same output action.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[state] (as) {$a_s$};
+        \node[state, right=1cm of as] (1) {$a_1$};
+        \node[state, right=2cm of 1] (2) {$a_2$};
+        \node[state, right=1cm of 2] (af) {$a_f$};
+        \node[state, below=.5cm of as] (bs) {$b_s$};
+        \node[state, right=1cm of bs] (3) {$b_1$};
+        \node[state, right=2cm of 3] (4) {$b_2$};
+        \node[state, right=1cm of 4] (bf) {$b_f$};
+        \draw   (1) edge[above, arrow] node{$o!$\hspace{1em}$x := 0$} (2)
+                (3) edge[arrow, above] node{$o!$\hspace{1em}$y := 0$} (4)
+                (as) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (1)
+                (bs) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (3)
+                (2) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (af)
+                (4) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (bf)
+        ;
+    \end{tikzpicture}
+    \caption{Two TIOA with clocks that reset at the same time.}
+    \label{fig:tioa-scenario1}
+\end{figure}
+
+However in this scenario there are a few things to look out for, where the clocks cannot be combined. First scenario being if one of the components is cyclic like shown in figure \ref{fig:tioa-scenario2}. If the TIOA is cyclic we cannot prove that the two TIOAs will reset their clock at the same time. Therefore we can not prove that the model will be entirely the same when combining the two clocks. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[state] (as) {$a_s$};
+        \node[state, right=1cm of as] (1) {$a_1$};
+        \node[state, right=2cm of 1] (2) {$a_2$};
+        \node[state, right=1cm of 2] (af) {$a_f$};
+        \node[state, below=1cm of as] (bs) {$b_s$};
+        \node[state, right=1cm of bs] (3) {$b_1$};
+        \node[state, right=2cm of 3] (4) {$b_2$};
+        \node[state, right=1cm of 4] (bf) {$b_f$};
+        \draw   (1) edge[above, arrow] node{$o!$\hspace{1em}$x := 0$} (2)
+                (3) edge[arrow, above] node{$o!$\hspace{1em}$y := 0$} (4)
+                (as) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (1)
+                (bs) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (3)
+                (2) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (af)
+                (4) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (bf)
+                (1) edge[arrow, bend right=2cm] node[above, font=\bfseries]{$o!$} (as)
+        ;
+    \end{tikzpicture}
+    \caption{Two TIOAs where the clocks cannot be combined since one of them is cyclic.}
+    \label{fig:tioa-scenario2}
+\end{figure}
+
+
+Another thing we need to check the components for is whether one of the components have the ability to make the output action that resets the clock before the other. An example of this scenario is shown in figure \ref{fig:tioa-scenario3} where the second component has the guard $y > 3$. Here we cannot be sure that the two clocks, $x$ and $y$, will reset at the same time, since the second component is dependent on a guard in order to reset.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[state] (as) {$a_s$};
+        \node[state, right=2cm of as] (1) {$a_1$};
+        \node[state, right=2cm of 1] (2) {$a_2$};
+        \node[state, right=1cm of 2] (af) {$a_f$};
+        \node[state, below=1cm of as] (bs) {$b_s$};
+        \node[state, right=2cm of bs] (3) {$b_1$};
+        \node[state, right=2cm of 3] (4) {$b_2$};
+        \node[state, right=1cm of 4] (bf) {$b_f$};
+        \draw   (1) edge[above, arrow] node{$o!$\hspace{1em}$x := 0$} (2)
+                (3) edge[arrow, above] node{$o!$\hspace{1em}$y := 0$} (4)
+                (as) edge[arrow] node[font=\bfseries, above]{$o!$} (1)
+                (bs) edge[arrow] node[font=\bfseries, above]{$y>3\hspace{1em}o!$} (3)
+                (2) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (af)
+                (4) edge[arrow] node[fill=white, font=\bfseries, pos=0.4]{\Large ?} (bf)
+        ;
+    \end{tikzpicture}
+    \caption{Two TIOAs where the clocks $x$ and $y$ cannot be combined.}
+    \label{fig:tioa-scenario3}
+\end{figure}
+
+

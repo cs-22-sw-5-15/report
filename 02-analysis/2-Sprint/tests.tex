@@ -1,0 +1,32 @@
+\subsection{Testing Strategy}
+By the end of any sprint, the output or the result should be an increment that improves product. As declared in the agile manifesto (SOURCE), the code that was produced should be working. The meaning of the word 'working' in this context is twofold: 
+
+The increment should meet the definition of done(SCRUM). This first meaning of 'working' implies that the feature or improvement that was developed should meet the requirements for that feature. The act of checking if software meets its requirements is called \emph{validation testing}.
+
+The second meaning of 'working' is that the implementation does not break in unexpected ways. This is sometimes referred to as \emph{defect testing}.
+
+Developers are responsible for delivering working software so they require some heuristic that can inform them on the state of the code base. Automated testing is one such heuristic. For each feature that is introduced, there should be automated tests that validate that it is in fact working.
+
+Automatic validation testing is a \emph{black box} test. Black box testing entails providing the system an input and the system must then return the correct output. The only thing of concern in this test is that the output should match an expected value. How this output is produced is not relevant to the test.
+
+
+\paragraph{Unit Tests}
+Unit testing is a kind of defect testing where a single \emph{unit} is isolated and tested by itself. A unit in this case refers to some small piece of the code base that is logically separated from other parts of the code base. In a object oriented language, this unit might be a class. Otherwise it might be a module that exposes some functions that can be used elsewhere. The unit test should be able to reveal any undesirable behavior that a given unit exhibits by itself. 
+
+The test cases for unit tests of clock reduction are described below. These test cases are selected to test every aspect of the feature.
+
+\paragraph{Unused clocks}
+If a clock is never used in any guard in a component, it is technically unnecessary and it can always be removed.
+
+
+\paragraph{Redudant clocks}
+Two clocks that always reset at the same time are considered redundant and one of them can be removed. Guards and cycles can prevent clocks from being combined.
+
+\paragraph{Combined}
+A component can contain clocks that are unused as well as clocks that are duplicates. These have to be detected and reduced correctly.
+
+
+\subsection{Acceptance Tests}
+
+
+
