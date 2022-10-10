@@ -93,23 +93,6 @@ ItalicFont= *-Italic]
  
 %% === TABLE OF CONTENTS === %%
 \makeatletter
-\renewcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{1.5em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode \bfseries
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip\large
-      #1\nobreak\hfil
-      \nobreak\hb@xt@\@pnumwidth{\hss #2%
-                                 \kern-\p@\kern\p@}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}
 \renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
 \renewcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
 \renewcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
@@ -224,9 +207,9 @@ ItalicFont= *-Italic]
 \titlecontents{chapter}
 [0em] % ie, 1.5em (chapter) + 2.3em
 {}
-{\aaufontbold\contentslabel{2.3em}}
+{\aaufontbold\color{aaublue1}\contentslabel{2.3em}}
 {\hspace*{-2.3em}}
-{\titlerule*[1pc]{}\contentspage}
+{\titlerule*[1pc]{}\aaufont\color{aaublue1}\contentspage}
 \dottedcontents{section}[1em]{\color{aaublue1}\aaufont}{2.9em}{1pc}
 \dottedcontents{subsection}[2em]{\color{aaublue1}\aaufont}{3.3em}{1pc}
 
